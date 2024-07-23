@@ -2,9 +2,12 @@ public class  HexatoOcta
   {
     public static void main(String args[])
     {
-      int a=0x1F;
-      String ab=a.toString();
-      System.out.println(ab);
+      String a="0x1F";
+     int ab= Integer.parseInt(a);
+      
+      int rem=ab%8;
+	int que=ab/8;
+	System.out.println(que+""+rem);	
       
     }  
   }
