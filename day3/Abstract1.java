@@ -10,7 +10,7 @@ public class Abstract1 extends Abs {
     public void abstractMethod(){
         System.out.println("this is Abstract method");
     }
-    public static void main(){
+    public static void main(String args[]){
         Abstract1 obj1=new Abstract1();
         obj1.abstractMethod();
         obj1.nonAbstractMethod();

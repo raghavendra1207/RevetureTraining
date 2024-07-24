@@ -9,7 +9,7 @@ public class Inhertiance extends Parent{
 	public void childClass() {
 		System.out.println("this is child class method");
 	}
-	public static void main() {
+	public static void main(String args[]) {
 		Inhertiance chd=new Inhertiance();
 		chd.parentClass();
 		chd.childClass();
