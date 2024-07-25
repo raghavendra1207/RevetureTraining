@@ -1,16 +1,25 @@
+
+
+// phase1
+// 1
 abstract class Character
 {
     String name;
     String race;
     int level;
-    int Health;
-    Character(String name,String race,int level){
+    int health;
+    int power;
+    Character(String name,String race,int level,int power){
         this.name=name;
         this.race=race;
         this.level=level;
-        this.Health=100;
+        this.health=100;
+        this.power=power;
     }
 
+    public int attackPower(){
+        return this.power;
+    }
     public String getName(){
         return this.name;
     }
@@ -24,60 +33,63 @@ abstract class Character
 
     }
     public int getHealth(){
-        return this.Health;
+        return this.health;
     }
+
+    
     public void attackHealth(){
-        this.Health-=30;
-        if(this.Health<0){
-            this.Health=0;
+        this.health-=30;
+        if(this.health<0){
+            this.health=0;
         }
     }
 
     public void drinkPortion()
     {
-        this.Health+=50;
-        if(this.Health>100){
-            this.Health=100;
+        this.health+=50;
+        if(this.health>100){
+            this.health=100;
         }
         
     }
     
-    abstract void ability();
+    abstract void viewAbilities();
 
 }
 
+// 2
 class HumanRace extends Character
 {   
-    HumanRace(String name,int level){
-        super(name,"Human", level);
+    HumanRace(String name,int level,int power){
+        super(name,"Human", level,power);
     }
 
     @Override
-    public void ability(){
+    public void viewAbilities(){
         System.out.println("Human abilities are: Knowledge and Technic");
     }
 }
 
 class DwarfRace extends Character
 {
-    DwarfRace(String name,int level){
-        super(name,"Dwarf",level);
+    DwarfRace(String name,int level,int power){
+        super(name,"Dwarf",level,power);
     }
 
     @Override
-    public void ability(){
+    public void viewAbilities(){
         System.out.println("Dwarf abilities are: Resilience etc");
     }
 }
 
 class ElfRace extends Character
 {
-    ElfRace(String name,int level){
-        super(name,"Elf",level);
+    ElfRace(String name,int level,int power){
+        super(name,"Elf",level,power);
     }
 
     @Override
-    public void ability(){
+    public void viewAbilities(){
         System.out.println("Elf abilities are: Immortal");
     }
 
@@ -86,24 +98,150 @@ class ElfRace extends Character
 
 class HobbitRace extends Character{
     HobbitRace(String name,int level){
-        super(name,"Hobbit",level);
+        super(name,"Hobbit",level,20);
     }
 
     @Override
-    public void ability(){
+    public void viewAbilities(){
         System.out.println("Hobbit abilities are: Dimintive and Stealth");
     }
 }
+
+//3
+interface CharacterClass{
+    
+    void viewAbilities();
+    
+}
+
+//4
+class Ranger implements CharacterClass
+{
+    @Override    
+    public void viewAbilities()
+    {
+        System.out.println("Ranger Abilities are: tracking and Hunting");
+
+    }
+}
+
+class Wizard implements CharacterClass
+{
+    @Override
+    public void viewAbilities(){
+        System.out.println("Wizard Abilities are SpellCasting");
+
+
+    }
+}
+
+class Warrior implements CharacterClass{
+    @Override
+    public void viewAbilities(){
+        System.out.println("Warriot ability is Combat power");
+    }
+}
+
+class Commoner implements CharacterClass{
+    @Override
+    public void viewAbilities(){
+        System.out.println("commoner abilities are none");
+    }
+}
+    
+// 5
+abstract class Creature
+{
+    int health;
+    int power;
+    String race;
+    Creature(String race,int health,int power ){
+        this.power=power;
+        this.health=health;
+        this.race=race;
+    }
+
+    public String getName(){
+        return this.race;
+    }
+
+    public int getHealth(){
+        return this.health;
+
+    }
+
+    public int getAttackPower(){
+        return this.power;
+    }
+    public void attack(){
+        this.health-=30;
+        if(this.health<0){
+            this.health=0;
+        }
+    }
+
+    abstract void viewAbilities();
+}
+
+//6 
+class Orc extends Creature{
+    Orc(int health,int power){
+        super("orc",health,power);
+    }
+    @Override
+    public void viewAbilities(){
+        System.out.println("Orc abilities are the electrical damage ");
+    }
+}
+
+class Troll extends Creature{
+    Troll(int health,int power){
+        super("Troll",health,power);
+    }
+    @Override
+    public void viewAbilities(){
+        System.out.println("m");
+    }
+}
+
+class Dragon extends Creature{
+    Dragon(int health,int power){
+        super("Dragon",health,power);
+    }
+    @Override
+    public void viewAbilities(){
+
+    }
+}
+
+class Nazgull extends Creature{
+    Nazgull(int health,int power){
+        super("Nazgull",health,power);
+    }
+    @Override
+    public void viewAbilities(){
+
+    }
+}
+
+// phase2
+class Battle
+{
+    public void battleBetween(Character character,Creature creature){
+        System.out.println("Battle Between\n"+character.getName()+" VS "+creature.getName());
+        System.out.println(character.getName()+" Health and Attack power is "+character.getHealth()+" and "+character.attackPower()+"\n"+creature.getName()+" Helth and power is "+creature.getHealth()+" and "+creature.getAttackPower());
+        
+    }
+}
+
 public class LordOfRings
 {
     public static void main(String[] args) {
-        HumanRace pavan=new HumanRace("Pavan", 35);
-        System.out.println(pavan.getName());
-        pavan.ability();
-        System.out.println(pavan.getHealth());
-        pavan.attackHealth();
-        System.out.println(pavan.getHealth());
-        pavan.drinkPortion();
-        System.out.println(pavan.getHealth());
+        Character character=new ElfRace("Grindalf",30, 20);
+        Creature creature=new Dragon(20, 30);
+        Battle battle=new Battle();
+        battle.battleBetween(character, creature);
+        
+
     }
 }
