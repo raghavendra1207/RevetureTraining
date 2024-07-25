@@ -17,7 +17,7 @@ abstract class Character
         this.power=power;
     }
 
-    public int attackPower(){
+    public int getAttackPower(){
         return this.power;
     }
     public String getName(){
@@ -173,8 +173,8 @@ abstract class Creature
     public int getAttackPower(){
         return this.power;
     }
-    public void attack(){
-        this.health-=30;
+    public void attackHealth(int power){
+        this.health-=power;
         if(this.health<0){
             this.health=0;
         }
@@ -228,8 +228,24 @@ class Nazgull extends Creature{
 class Battle
 {
     public void battleBetween(Character character,Creature creature){
+        
         System.out.println("Battle Between\n"+character.getName()+" VS "+creature.getName());
-        System.out.println(character.getName()+" Health and Attack power is "+character.getHealth()+" and "+character.attackPower()+"\n"+creature.getName()+" Helth and power is "+creature.getHealth()+" and "+creature.getAttackPower());
+        System.out.println(character.getName()+" Health and Attack power is "+character.getHealth()+" and "+character.getAttackPower()+"\n"+creature.getName()+" Helth and power is "+creature.getHealth()+" and "+creature.getAttackPower());
+        while(character.getHealth()>0 && creature.getHealth()>0 ){
+            character.attackHealth();
+            creature.attackHealth(character.getAttackPower());
+            if(character.getHealth()<10 && creature.getHealth()>character.getHealth()){
+                character.drinkPortion();
+            }
+
+        }
+        if(character.getHealth()>0){
+            System.out.println(character.getName()+" won the battle");
+
+        }
+        else{
+            System.out.println(creature.getName()+" won  the battle");
+        }
         
     }
 }
