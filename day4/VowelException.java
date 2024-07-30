@@ -7,7 +7,7 @@ public class VowelException  {
 
     public void containsVowel(String str1) throws CreateException{
         str1=str1.toLowerCase();
-        char[] array2=str1.toCharArray();
+        char[] array2=str1.toCharArray(); //['a']
         char[] vowelArray={'a','e','i','o','u'};
         int flag=0;
         for(int i=0;i<array2.length;i++){

@@ -15,6 +15,7 @@ public class ReflectDemo {
 		fieldobj.set("p",4);
 		
 		
+		
 		Method m1=PrivateDeclaration.class.getDeclaredMethod("getName");
 		m1.setAccessible(true);
 		System.out.println(m1.invoke("getName()"));
