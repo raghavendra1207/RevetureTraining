@@ -76,15 +76,10 @@ ON E.DepartmentID=D.DepartmentID;
 
 -- Retrieve all possible combinations of employees and projects.
 
-SELECT E.EmployeeID,E.EmployeeName,D.DepartmentName,D.DepartmentID
+SELECT E.EmployeeID,E.EmployeeName,P.ProjectName,P.DepartmentID
 FROM Employee E
-LEFT JOIN Departments D
-on E.DepartmentID=D.DepartmentID
-UNION
-SELECT E.EMPLOYEEID,E.EMPLOYEENAME,D.DepartmentName,D.DepartmentID
-FROM Employee E
-RIGHT JOIN Departments D
-ON E.DepartmentID=D.DepartmentID;
+INNER JOIN Projects P
+on E.DepartmentID=P.DepartmentID;
 
 -- Retrieve the list of employees whose department ID is greater than the department ID of "HR" department-- 
 SELECT E.EMPLOYEEID,E.EMPLOYEENAME,E.DepartmentID,D.DepartmentName,D.DepartmentID
